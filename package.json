@@ -1,15 +1,15 @@
 {
-  "name": "@jackyzha0/quartz",
-  "description": "🌱 publish your digital garden and notes as a website",
+  "name": "@consla/consla.github.io",
+  "description": "thoughts",
   "private": true,
   "version": "4.1.1",
   "type": "module",
-  "author": "jackyzha0 <j.zhao2k19@gmail.com>",
+  "author": "consla <conslaaa@proton.me>",
   "license": "MIT",
-  "homepage": "https://quartz.jzhao.xyz",
+  "homepage": "https://consla.github.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jackyzha0/quartz.git"
+    "url": "https://github.com/consla/consla.github.io.git"
   },
   "scripts": {
     "docs": "npx quartz build --serve -d docs",
