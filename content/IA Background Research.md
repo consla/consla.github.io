@@ -27,7 +27,7 @@ $\hat{\tau}$ is the unit tangent vector of the path at the nearest point, $\vec{
 > 
 > Additionally, $k_{n}$ is just a way to blend the weights of $\hat{\tau}$ and $\vec{e}$. Bigger $k_{n}$ means $\vec{e}$ has a heavier weight and so the robot path will converge to the path quicker at the potential expense of sharper movements and oscillations, while smaller $k_{n}$ means $\hat{\tau}$ has a heavier weight and so that robot will move smoother and follow the relative movement of the path more, at the expense of slower path convergence. Selection of $k_{n}$ also depends on the application and is sometimes empirically tuned.
 
-$\hat{m_{d}}$ is the only vector that the robot actually follows since GVF simply determines the direction in which the robot will travel. Velocity is independently controlled through other means, which will be touched on later.
+$\hat{m_{d}}$ is the only vector that the robot actually follows since GVF simply determines the direction in which the robot will travel. Velocity is independently controlled through other means, which is an implementation detail.
 
 The vector field can be described very succinctly like so:
 $$
@@ -41,8 +41,8 @@ $$
 Let's look at the disadvantages to other commonly used path followers and then see how GVFs both solve and introduce problems.
 #### PID to point
 This is simply a [PID controller](https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller) (a function that calculates how much "power" to apply to an object to drive it to a desired reference state, typically position or velocity) on position that follows a series of points. The major disadvantage of this is that this does not allow the robot to follow smooth paths, but instead start and stop between each movement. In a game where every second counts, this is undesirable and being able to follow smooth paths greatly saves time.
-#### [Pure Pursuit](https://wiki.purduesigbots.com/software/control-algorithms/basic-pure-pursuit#what-is-the-pure-pursuit-controller)
-A semi-popular option, this also takes a series of points, but smooths the movement out by drawing lines between consecutive points, drawing a circle around the robot of a specified *lookahead* radius, and then travelling towards the intersection between the circle and the line. This technique has been used to great success in the past with FTC. However, it suffers from error from the specified path on curves which is just a part of the controller design, poor turning performance when dealing with various curvatures (only applicable to implementations with a fixed lookahead radius), and problematic special cases like behavior when the error is greater than the drawn circle, among others.
+#### Pure Pursuit
+A semi-popular option, [Pure Pursuit](https://wiki.purduesigbots.com/software/control-algorithms/basic-pure-pursuit#what-is-the-pure-pursuit-controller) also takes a series of points, but smooths the movement out by drawing lines between consecutive points, drawing a circle around the robot of a specified *lookahead* radius, and then travelling towards the intersection between the circle and the line. This technique has been used to great success in the past with FTC. However, it suffers from error from the specified path on curves which is just a part of the controller design, poor turning performance when dealing with various curvatures (only applicable to implementations with a fixed lookahead radius), and problematic special cases like behavior when the error is greater than the drawn circle, among others.
 #### Time-based motion profiled paths
 This is the current most popular option in FTC by far, being used by a very popular and successful autonomous movement library called [Roadrunner](https://rr.brott.dev/docs/v0-5/tour/introduction/). This system can be thought of as an extension of PID to point: instead of having a set of points that the robot travels to, the robot continually tracks the path using PID, with a reference point that smoothly moves along a parametrically defined function in accordance with a [trapezoidal motion profile](https://www.ctrlaltftc.com/advanced/motion-profiling), which smoothly changes velocity using constant acceleration and deceleration. This solves many problems, with smooth movement and good path convergence.
 
@@ -84,7 +84,7 @@ $$
 
 where $p_{0}$ is the starting position, $v_{0}$ is the starting velocity, $p_{1}$ is the end position, $v_{1}$ is the end velocity, and $P(t)$ is a parametric function that gives a point in a 2-dimensional space and $0\leq t\leq 1$.
 
-Here is an example graph in Desmos of 2 cubic Hermite splines joined where the purple lines meet the green:
+Here is [an example graph](https://www.desmos.com/calculator/jcr7lo3e3g) in Desmos of 2 cubic Hermite splines joined where the purple lines meet the green:
 
 ![[cubic_hermite.png]]
 
