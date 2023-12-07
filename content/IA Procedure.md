@@ -1,6 +1,7 @@
 ## Platform
 ### Hardware
 The robot used for this experiment will be my FIRST Tech challenge team's competition robot. It is around 13.5x13.5 inches wide and a little under 11 inches tall. In order to perform localization (track its location) and therefore how much error off the desired path, it has a pair of odometry pods on the bottom. The drivetrain uses mecanum wheels, which are wheels with wheels angled at 45 degrees that allow holonomic movement.
+![[bot_bottom.png]]
 ![[mecanum vectors.excalidraw.dark.svg|500]]
 > [!info] Holonomic movement
 > A holonomic robot can move in any direction independent of heading (angle the robot is facing), which lets you do all sorts of crazy stuff like spinning while going in a straight line or orbiting in a circle. To be more formal, holonomic movement is when every part of the state (which in our case is its position and heading) can change independently of all other states.
@@ -11,8 +12,6 @@ The robot used for this experiment will be my FIRST Tech challenge team's compet
 > An odometry pod is a single unpowered omniwheel (wheel with rollers that allow it to freely slide sideways) attached to a rotational encoder that is sprung into the ground for traction. That encoder reads velocity, and that velocity is then read and integrated over time to achieve position. The smaller the wheels (more rotations per distance), the faster the refresh rate (smaller $dt$), and the better springing into the ground (more traction -> less slip), the more accurate the localization will be.
 > 
 > The reason why encoders aren't read off the motors that spin the mecanum wheels is because those wheels will drift: every time you run into a wall or another robot or anything, the wheels will keep spinning even though the robot isn't going anywhere and mess up the localization. Our current odometry system is accurate to $\pm 1$ inch over a $100$ inches or so. However, it is not well tuned nor well sprung and was recently driven around on sawdust (which introduces slip) in a wood shop for a demonstration for middle schoolers, so that accuracy can likely be improved.
-
-![[bot_bottom.png]]
 
 The robot will drive on a 12x12 foot field constructed of interlocked foam tiles, the same construction used for competition. If the place where I test ends up being too small I may reduce the size. The tiles will be coated with Staticide, but that should have a negligible effect on friction.
 ### Software
