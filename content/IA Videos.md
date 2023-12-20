@@ -15,3 +15,6 @@
 
 > [!tldr]- $k_{n} = 1.8$:
 ![[line18.mp4]]
+
+> [!tldr]- Spline test
+> ![[spline.mp4]]
