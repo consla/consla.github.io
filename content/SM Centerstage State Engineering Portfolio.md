@@ -17,4 +17,4 @@
 
 PDF Download:
 
-![[SM Port CS STATE.pdf]]
+[SM Port CS STATE](https://consla.github.io/SM-Port-CS-STATE.pdf)
